@@ -1,0 +1,58 @@
+﻿
+
+	<section class="addPersonSection" >
+		<div>
+			<div class="plan_help">
+				<p>{{title}}</p>
+				<div>已加入会员<label>{{memberNum}}人</label></div>
+				<div>已有互助保障金<label>{{amount}}元</label></div>
+				<div>帮助均摊额<label>{{avgAmount}}元</label></div>
+			</div>
+			<div ng-hide="protectedLabel || payLabel" ng-click="addProtectedPerson()" class="addMore_first">+添加被保障人</div>
+			<ul ng-show="protectedLabel" class="person_help_ul">
+				<p>已加入被保障人<a ng-show="protectedLabel" ng-click="addProtectedPerson()" style="float:right;color:#f76500;font-weight: bold;">添加更多被保障人</a></p>
+				<li class="addedPerson" ng-repeat="curProtect in personList_protected">
+					<div ng-click="personDetail(curProtect)">
+						<label >{{curProtect.name}}</label>
+						<span> &gt;</span>
+						<label ng-if="curProtect.status == '1'" style="color: #ffad00;border: 1px solid #ffad00;">等待期</label>
+						<label ng-if="curProtect.status == '2'" style="color: #22b98d;border: 1px solid #22b98d;">保障中</label>
+						<label ng-if="curProtect.status == '3'" style="color: #f61a00;border: 1px solid #f61a00;">请续费</label>
+					</div>
+				</li>
+			</ul>
+			<ul ng-show="payLabel" class="person_help_ul">
+				<p>待支付<a ng-hide="protectedLabel" ng-click="addProtectedPerson()" style="float:right;color:#f76500;font-weight: bold;">添加更多被保障人</a></p>
+				<div class="toPayPersonDiv" >
+					<li class="toPayPerson" ng-repeat="curPay in personList_pay" ng-class="{toPayPerson_active:curPay.chooseLabel}"  ng-click="waitToPay($index)"><!--haha="false" ng-click="waitToPay($event)"-->
+						<div>
+							<label >姓名：</label>
+							<label >{{curPay.name}}</label>
+							<label class="toPayPerson_price" ng-class="{toPayPerson_price_active:curPay.chooseLabel}">待支付</label>
+						</div>
+						<div>
+							<label >身份证:</label>
+							<label >{{curPay.idNumber}}</label>
+							<label style="color:#48C748;">10元</label>
+						</div>
+					</li>
+				</div>
+			</ul>
+			<!--<div class="addMore_help"><span ng-click="addProtectedPerson()">+ 添加更多被保障人</span></div>-->
+			<div ng-show="protectedLabel || payLabel" ng-click="preOrder()" class="toPayTotal_help"><span>支付</span><span>共{{payMoneyCount}}元</span></div>
+		</div>
+
+		<!--/////刷卡支付///////////////////////////////////////////////////////////-->
+		<div style="display:none;">
+			<form action="opencashboxapp://cashboxapppay" id="frm">
+				<input type="hidden" name="orderNo" id="orderNo">
+				<input type="hidden" name="orderAmount" id="orderAmount_2">
+				<input type="hidden" name="returnUrl" id="returnUrl">
+			</form>
+		</div>
+		<!--/////刷卡支付///////////////////////////////////////////////////////////-->
+
+	</section>
+
+
+

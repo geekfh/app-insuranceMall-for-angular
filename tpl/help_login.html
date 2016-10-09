@@ -1,0 +1,19 @@
+
+    <section class="helpLoginClass">
+        <!--<div>用户登录</div>-->
+        <form name="loginForm_help">
+            <ul>
+                <li ng-class="{'error_help':loginForm_help.contactsTel.$touched && loginForm_help.contactsTel.$invalid}">
+                    <input type="text" name="contactsTel" style="height:96%;"
+                           id="Mobile"  placeholder="请输入联系方式" class='phoneNumberClass' ng-model="phone_help" ng-minlength="11" maxlength="11"
+                           ng-pattern="/^0?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/i" required/>
+                </li>
+                <li >
+                    <input type="text" ng-model="verifyNum" name="code" placeholder="短信验证码"  ng-minlength="4" maxlength="4"  required/>
+                    <button class="sendVerCode" ng-click="getCode()" ng-bind="paracont" ng-disabled="sending" ng-class="{grayBtn:sending}" style="border:1px solid gray;">获取验证码</button>
+                </li>
+            </ul>
+            <button class="helpLoginBtn" ng-click="help_login()" ng-disabled="loginForm_help.$invalid" ng-class="{helpLoginBtn_active:loginForm_help.$valid}" >登录</button>
+        </form>
+    </section>
+

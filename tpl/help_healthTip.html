@@ -1,0 +1,35 @@
+
+	<div style="width:100%;background-color:#fff">
+		<div class="health_title" style="margin-top:0px;padding-top: 0.4rem;" >健康告知</div>
+		<ol class="health_rule"  >
+			<li class="health_rule_item" style="list-style:decimal inside;margin-bottom: 0.15rem;">您是否曾在投保医疗、意外或财产保险时候被拒绝、延期或附加条件承保？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">目前尚在住院或病假中？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">近两年内有无患病不能全勤工作或减轻劳动量？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">是否曾经患过某些症状或疾病被医师建议去做进一步检查、治疗？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">现在或过去有无患肿瘤、癫痫、脑震荡、精神病、心脏病、高血压、血管硬化、中风、糖尿病、尿毒症、慢性酒精中毒、肝硬化、肾切除三年以上（外伤性切除不在此列）？或肾病、性病等生殖泌尿系统疾病，哮喘、肺结核等呼吸系统疾病、胃、肝、胆、肠等消化系统疾病，血液病、艾滋病、心疼、神经系统疾病，甲状腺疾病以及任何神经肌肉骨骼系统方面的异常、失能等病症？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">有无吸毒史？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">在最近6个月内，您是否有任何身体不适症状和体征？如持续发热、疼痛、眩晕、胸痛、咳血、腹痛，便血、紫斑、消瘦(体重短期内下降超过5公斤)。</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">有无身体残障状况？</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">妇女栏：（会员为女性时，请说明）
+				<ol  style="list-style:lower-alpha inside;"><!--type="a"-->
+					<li style="list-style:lower-alpha inside;">过去五年内曾否患子宫、乳房、卵巢等生殖系统方面疾病？</li>
+					<li style="list-style:lower-alpha inside;">目前是否怀孕？是否被诊断为高危妊娠？</li>
+				</ol>
+			</li>
+			<li class="health_rule_item" style="list-style:decimal inside;">少儿栏：(会员为0-15周岁儿童时，请说明)
+				<ol  style="list-style:lower-alpha inside;"><!--type="a"-->
+					<li style="list-style:lower-alpha inside;">有无先天性、遗传性疾病或畸形？</li>
+					<li style="list-style:lower-alpha inside;">过去曾否患过肺炎、抽搐、腹泻、小儿麻痹、儿童多动症、脊髓灰质炎、麻疹、流行性脑脊髓膜炎、白喉、破伤风、百日咳等疾病？</li>
+				</ol>
+			</li>
+		</ol>
+
+		<div class="health_buttonDiv" >
+			<span class="health_button" ng-click="helpHealthNotice('0')" style="background-color: #ff6c01;color:#fff">以上全无</span>
+			<span class="health_button" ng-click="helpHealthNotice('1')" style="border-color: gray;">部分情况有</span>
+		</div>
+		<!--<div class="screen_cover" style="display: block;" >-->
+			<div class=" buyTip"  ng-show="buyTipLabel">被保险人不满足购买此产品的健康需要，暂无法购买</div>
+		<!--</div>-->
+	</div>
+

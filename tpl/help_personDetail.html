@@ -1,0 +1,112 @@
+﻿
+
+	<section class="personDetailSection" >
+		<div class="planTitleDiv">已加入{{projectName}}</div>
+		<div class="planContentDiv">
+			<p>会员信息</p>
+			<ul class="personInfo_ul">
+				<li>姓名<label>{{name}}</label></li>
+				<li>身份证<label>{{idNumber}}</label></li>
+				<li ng-click="protectState()">保障状态<label class="protectState"><span><img style="width: 0.3rem;height: 0.3rem;" src="image/questionMark.png"/></span><span>{{status}}</span></label></li>
+				<li>加入时间<label>{{createTime}}</label></li>
+				<li>保障生效日期<label>{{expiryTime}}</label></li>
+			</ul>
+		</div>
+		<div class="planContentDiv">
+			<p>账户信息</p>
+			<ul class="accountInfo_ul">
+				<li class="accountBalanceClass" ng-click="accountState()">
+					<label class="accountBalance_label1">账户余额</label>
+					<label class="accountBalance_label2">{{balance}}元</label>
+					<label class="accountBalance_label3">
+						<img style="float:right;width: 0.3rem;height: 0.3rem;margin-top: 0.3rem;" src="image/questionMark.png"/>
+						<span ng-if="balanceLabel == 'good'" style="background-color:#2eb98f;">充足</span>
+						<span ng-if="balanceLabel == 'normal'" style="background-color:#ff6a00;">告急</span>
+						<span ng-if="balanceLabel == 'bad'" style="background-color:#ff0000;">不足</span>
+					</label>
+				</li>
+				<li ng-click="accountInfo()">账户<label class="accountPic">&gt;</label></li>
+			</ul>
+		</div>
+		<div class="rechargeClass" ng-click="toRechart()">充值</div>
+	</section>
+
+	<!--点击--微信充值-->
+	<div ng-show="rechargeLabel" class="screen_cover rechargeDivClass" style="display: block;">
+		<div class="rechargeTitle" ng-click="closeRecharge()"><label>&larr;</label><label style="padding-left: 0.3rem;">充值</label></div>
+		<div class="priceClass">
+			<div>
+				<label ng-click="phoneChart(20)" ng-class="{priceClass_active:chartLabel == 20}"><span>20 </span>元</label>
+				<label ng-click="phoneChart(50)" ng-class="{priceClass_active:chartLabel == 50}"><span>50 </span>元</label>
+				<label ng-click="phoneChart(100)" ng-class="{priceClass_active:chartLabel == 100}"><span>100 </span>元</label>
+			</div>
+			<div><input type="number" class="inputPrice" ng-model="chartMoney"  placeholder="   其他金额"/><label class="yuanClass" style="float: right;">元</label></div>
+		</div>
+		<div class="payWay" style="display: none;">
+			<div >
+				<img src="image/wechatpay.png" width="70%"/>
+			</div>
+		</div>
+		<div class="paySure_btn" ng-click="recharge_help()">确认支持</div>
+
+		<!--/////刷卡支付///////////////////////////////////////////////////////////-->
+		<div style="display:none;">
+			<form action="opencashboxapp://cashboxapppay" id="frm">
+				<input type="hidden" name="orderNo" id="orderNo">
+				<input type="hidden" name="orderAmount" id="orderAmount_2">
+				<input type="hidden" name="returnUrl" id="returnUrl">
+			</form>
+		</div>
+		<!--/////刷卡支付///////////////////////////////////////////////////////////-->
+
+	</div>
+
+	<!--点击--账户-->
+	<div ng-show="accountLabel" class="screen_cover accountDivClass" style="display: block;">
+		<div class="accountTitle">账单</div>
+		<div class="accountDetail">
+			<ul>
+				<li ng-repeat="payFlow in payFlowList">
+					<!--<label class="accountTip_in">充</label>-->
+					<label><img style="width:1.0rem;" src="image/help_chong.png"/></label>
+					<label>
+						<div class="timeDiv">{{payFlow.payTime}}</div>
+					</label>
+					<label style="margin-right: 0.3rem;">+{{payFlow.amount}}元</label>
+				</li>
+				<li ng-repeat="helpFlow in helpFlowList">
+					<!--<label class="accountTip_out">助</label>-->
+					<label><img style="width:1.0rem;" src="image/help_zhu.png"/></label>
+					<label>
+						<div class="timeDiv">{{helpFlow.payTime}}</div>
+					</label>
+					<label ng-if="helpFlow.type == 0">-{{helpFlow.amount}}元 <span style="color: #c8c7cc;width: 0.3rem;font-size: 0.4rem;">&gt;</span></label>
+					<label ng-if="helpFlow.type == 1">+{{helpFlow.amount}}元 <span style="color: #c8c7cc;width: 0.3rem;font-size: 0.4rem;">&gt;</span></label>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!--点击--账户余额--行-->
+	<div ng-show="accountStateLabel" class="screen_cover " style="display: block;">
+		<div class="stateDivClass">
+			<ul>
+				<li><label style="background-color:#2eb98f;">充足</label>账户余额&gt;50元</li>
+				<li><label style="background-color:#ff6a00;">告急</label>3&lt;账户余额&le;50元</li>
+				<li><label style="background-color:#ff0000;">不足</label>账户余额&le;3元</li>
+				<li ng-click="closeAccountState()"><span >我明白了</span></li>
+			</ul>
+		</div>
+	</div>
+
+	<!--点击--保障状态--行-->
+	<div ng-show="protectStateLabel" class="screen_cover " style="display: block;">
+		<div class="stateDivClass">
+			<ul>
+				<li><label style="background-color:#66cc99;">等待期</label>又称观察期或免责期，是为了防止参与保障计划的会员明知道风险将要发生，而马上加入已获得利益的行为，列入带病投保的行为。</li>
+				<li><label style="background-color:#ff9900;">保障中</label>正常享受保障</li>
+				<li><label style="background-color:#cccccc;">请续费</label>当前用户余额不足，暂时失去保障。用户在余额不足的60天内充值可随时重新获得保障，无需再经过等待期，超过60天则需要重新计划等待期。</li>
+				<li ng-click="closePeopleState()"><span >我明白了</span></li>
+			</ul>
+		</div>
+	</div>

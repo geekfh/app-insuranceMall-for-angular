@@ -1,0 +1,30 @@
+﻿
+
+	<section class="addPersonSection" >
+		<div class="noPerson_help_div"><!-- ng-if="noPerson_help == true"-->
+			<p class="addP">添加被保障人</p>
+			<form name="addForm" class="addFormClass">
+				<ul>
+					<li ng-class="{'error': addForm.name.$touched && addForm.name.$invalid}" class="heightSet"><!---->
+						<label style="font-weight: normal;">姓名</label>
+						<input type="text" name="name"  class="pull-right" ng-model="addPerson.name"
+							   ng-pattern="/^[\u0391-\uFFE5]+$/i"  minlength="2" maxlength="8" placeholder="请输入被保险人名字" required >
+					</li>
+					<li ng-class="{'error': addForm.dID.$touched && addForm.dID.$invalid || addForm.dID.$touched && !idNumberLabel}"   class="heightSet"> <!---->
+						<label style="font-weight: normal;">身份证号：</label>
+						<input type="text" name="dID" class="pull-right" ng-change="idNumberTest_help(addPerson.idNumber)"
+							   ng-model="addPerson.idNumber" placeholder="请输入身份证号码" minlength="15" maxlength="18" required/>
+					</li>
+				</ul>
+				<div class="addTipClass">以上信息将成为您获取保障的重要凭证，一旦填写不可修改，请如实填写，仔细核对。</div>
+				<ul class="addBtn_help">
+					<button class="cancelBtn_help" ng-click="cancalAdd_help()">取消</button>
+					<button ng-disabled="addForm.$invalid || !idNumberLabel" class="okBtn_help" ng-class="{'okBtn_help_active':addForm.$valid && idNumberLabel}"  ng-click="AddPerson_help(addPerson)">确认</button>
+					<!--<button class="okBtn_help" ng-class="{'okBtn_help_active':true}"  ng-click="AddPerson_help(addPerson)">确认</button>-->
+				</ul>
+			</form>
+		</div>
+
+		<div class="buyTip"  ng-show="existLabel">被保障人已经存在！</div>
+
+	</section>
